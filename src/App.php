@@ -124,6 +124,7 @@ class App
             self::$console->println("");
             self::$console->println("Player, it's your turn");
 
+
             self::$console->println("Enemy's ships:");
             /** @var Ship $ship */
             foreach (self::$enemyFleet as $ship) {
@@ -134,10 +135,20 @@ class App
                 self::$console->println($line);
             }
 
-            self::$console->println("Enter coordinates for your shot :");
-            $position = readline("");
+            $parsedPosition = null;
+            while (null === $parsedPosition) {
+                self::$console->println("Enter coordinates for your shot :");
+                $position = readline("");
 
-            $ship = GameController::getShip(self::$enemyFleet, self::parsePosition($position));
+                try {
+                    $parsedPosition = self::parsePosition($position);
+                } catch (InvalidArgumentException $e) {
+                    self::$console->println($e->getMessage());
+
+                }
+            }
+
+            $ship = GameController::getShip(self::$enemyFleet, $parsedPosition);
             $isHit = null !== $ship;
             if ($isHit) {
                 $ship->hit();
@@ -188,8 +199,10 @@ class App
         $letter = substr($input, 0, 1);
         $number = substr($input, 1, 1);
 
+        Letter::validate($letter);
+
         if (!is_numeric($number)) {
-            throw new Exception("Not a number: $number");
+            throw new InvalidArgumentException("Not a number: $number");
         }
 
         return new Position($letter, $number);
