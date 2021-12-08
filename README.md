@@ -1,6 +1,11 @@
 # Battleship PHP
 
-A simple game of Battleship, written in PHP. Created by Sergey https://github.com/2heoh 
+A simple game of Battleship, written in PHP. Created by Sergey https://github.com/2heoh
+
+### Download game
+
+Use this [link](https://github.com/C3rb/battleship-php/archive/refs/heads/master.zip)
+It's a zip file. Unpack it somewhere.
 
 ### Run locally
 
