@@ -80,41 +80,19 @@ class App
     {
         self::$myFleet = GameController::initializeShips();
 
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 4));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 5));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 6));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 7));
-        array_push(self::$myFleet[0]->getPositions(), new Position('B', 8));
+        self::$console->println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 6));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 7));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 8));
-        array_push(self::$myFleet[1]->getPositions(), new Position('E', 9));
+        foreach (self::$myFleet as $ship) {
 
-        array_push(self::$myFleet[2]->getPositions(), new Position('A', 3));
-        array_push(self::$myFleet[2]->getPositions(), new Position('B', 3));
-        array_push(self::$myFleet[2]->getPositions(), new Position('C', 3));
+            self::$console->println();
+            printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
 
-        array_push(self::$myFleet[3]->getPositions(), new Position('F', 8));
-        array_push(self::$myFleet[3]->getPositions(), new Position('G', 8));
-        array_push(self::$myFleet[3]->getPositions(), new Position('H', 8));
-
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$myFleet[4]->getPositions(), new Position('C', 6));
-
-//        self::$console->println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
-//
-//        foreach (self::$myFleet as $ship) {
-//
-//            self::$console->println();
-//            printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
-//
-//            for ($i = 1; $i <= $ship->getSize(); $i++) {
-//                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
-//                $input = readline("");
-//                $ship->addPosition($input);
-//            }
-//        }
+            for ($i = 1; $i <= $ship->getSize(); $i++) {
+                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
+                $input = readline("");
+                $ship->addPosition($input);
+            }
+        }
     }
 
     public static function beep()
@@ -188,7 +166,7 @@ class App
             if ($isHit) {
                 $line = Color::CHARTREUSE . 'Yeah ! Nice hit !';
                 if (true === self::isFleetDestroyed(self::$enemyFleet)) {
-                    self::$console->println(Color::MAGENTA . 'Yeah ! YOU WIN !');
+                    self::$console->println(Color::MAGENTA . 'You are the winner!');
                     exit();
                 }
             } else {
@@ -238,7 +216,6 @@ class App
 
     public static function isFleetDestroyed($fleet) : bool
     {
-        $allShipsWereDestroyed = false;
         foreach ($fleet as $ship) {
             if (false === $ship->isDestroyed()) {
                 return false;
