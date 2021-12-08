@@ -3,8 +3,11 @@
   "description": "simple console game",
   "autoload": {
     "classmap": [
-      "src/"
-    ]
+      "src/App.php"
+    ],
+    "psr-4": {
+      "Battleship\\": "src/Batteship"
+    }
   },
   "require": {
     "php": ">7"

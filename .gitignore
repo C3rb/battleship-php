@@ -3,4 +3,3 @@ vendor/
 .phpunit*
 /.vs
 /testresults
-composer.lock

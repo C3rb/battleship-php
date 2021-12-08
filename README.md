@@ -1,66 +1,25 @@
-[![Build status](https://dev.azure.com/APS-SD-Stewards/APS-SD/_apis/build/status/proscrumdev.battleship-cpp-CI)](https://dev.azure.com/APS-SD-Stewards/APS-SD/_build/latest?definitionId=21)
-
 # Battleship PHP
 
 A simple game of Battleship, written in PHP. Created by Sergey https://github.com/2heoh 
 
-# Getting started
+### Run locally
 
-This project requires a php7 or higher. To prepare to work with it, pick one of these
-options:
-
-## Run locally
-
-Run battleship with composer
+Download and install PHP 7+ from [php.net](https://www.php.net/)
+and then run battleship with composer
 
 ```bash
 composer run game
 ```
 
-## Execute tests with composer
-
-Install dependencies
-```bash
-composer update
-```
-
-Run tests
-```bash
-composer run test
-```
-
-## Docker
+### or in Docker
 
 If you don't want to install anything php-related on your system, you can
 run the game inside Docker instead.
-
-### Run a Docker Container from the Image
 
 ```bash
 docker run -it -v ${PWD}:/battleship -w /battleship composer bash
 ```
 
-# Launching the game
+### Contribution
 
-```bash
-composer run game
-```
-
-# Running the Tests
-
-Don't forget to install dependencies ;)
-```bash
-composer update
-```
-
-Run tests:
-```
-composer run test
-```
-
-### Troubleshooting 
-
-1. On my ubuntu virtual server on DO I needed to install:
-```bash
-apt-get install composer php7.2-mbstring php7.2-dom
-```
+Check [CONTRIBUTION.md](CONTRIBUTION.md) file
