@@ -121,9 +121,9 @@ class App
         self::$console->println("    \" \"\" \"\" \"\" \"");
 
         while (true) {
-            self::$console->println("");
-            self::$console->println("Player, it's your turn");
-
+            self::$console->println('======================================================');
+            self::$console->println();
+            self::$console->println(Color::MAGENTA . "Player, it's your turn" . Color::DEFAULT_GREY);
 
             self::$console->println("Enemy's ships:");
             /** @var Ship $ship */
@@ -144,7 +144,6 @@ class App
                     $parsedPosition = self::parsePosition($position);
                 } catch (InvalidArgumentException $e) {
                     self::$console->println($e->getMessage());
-
                 }
             }
 
@@ -172,7 +171,7 @@ class App
             } else {
                 $line = Color::CADET_BLUE . 'Miss';
             }
-            self::$console->println($line.Color::DEFAULT_GREY);
+            self::$console->println($line . Color::DEFAULT_GREY);
             if ($isHit) {
                 if ($ship->isDestroyed()) {
                     self::$console->println(Color::CHARTREUSE . 'Enemy\'s ' . $ship->getName() . ' was destroyed!' . Color::DEFAULT_GREY);
@@ -184,8 +183,17 @@ class App
             $ship = GameController::getShip(self::$myFleet, self::parsePosition($position));
             $isHit = null !== $ship;
             self::$console->println();
-            printf("Computer shoot in %s%s and %s", $position->getColumn(), $position->getRow(), $isHit ? "hit your ship !\n" : "miss");
+            self::$console->println('======================================================');
+            self::$console->println();
+            $line = sprintf(Color::ORANGE . 'Computer shoot' . Color::DEFAULT_GREY . ' in %s%s and ', $position->getRow(), $position->getColumn());
             if ($isHit) {
+                $line .= Color::RED . 'hit your ship !';
+            } else {
+                $line .= Color::CADET_BLUE . 'miss';
+            }
+            self::$console->println($line . Color::DEFAULT_GREY);
+            if ($isHit) {
+                self::$console->println();
                 self::beep();
 
                 self::$console->println("                \\         .  ./");
@@ -197,6 +205,8 @@ class App
                 self::$console->println("                 -\\  \\     /  /-");
                 self::$console->println("                   \\  \\   /  /");
             }
+            self::$console->println();
+
             if (true === self::isFleetDestroyed(self::$myFleet)) {
                 self::$console->println(Color::ORANGE . ' YOU LOSE!');
                 exit();
