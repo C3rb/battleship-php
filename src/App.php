@@ -165,6 +165,10 @@ class App
 
             if ($isHit) {
                 $line = Color::CHARTREUSE . 'Yeah ! Nice hit !';
+                if (true === self::isFleetDestroyed(self::$enemyFleet)) {
+                    self::$console->println(Color::MAGENTA . 'Yeah ! YOU WIN !');
+                    exit();
+                }
             } else {
                 $line = Color::CADET_BLUE . 'Miss';
             }
@@ -192,11 +196,24 @@ class App
                 self::$console->println("            -   (\\- |  \\ /  |  /)  -");
                 self::$console->println("                 -\\  \\     /  /-");
                 self::$console->println("                   \\  \\   /  /");
-
             }
-
-//            exit();
+            if (true === self::isFleetDestroyed(self::$myFleet)) {
+                self::$console->println(Color::ORANGE . ' YOU LOSE!');
+                exit();
+            }
         }
+    }
+
+    public static function isFleetDestroyed($fleet) : bool
+    {
+        $allShipsWereDestroyed = false;
+        foreach ($fleet as $ship) {
+            if (false === $ship->isDestroyed()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static function parsePosition($input)
