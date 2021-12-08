@@ -1,5 +1,7 @@
 <?php
 
+require_once 'Console.php';
+
 use Battleship\GameController;
 use Battleship\Position;
 use Battleship\Letter;
