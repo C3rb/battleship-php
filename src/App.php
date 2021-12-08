@@ -163,7 +163,12 @@ class App
                 self::$console->println("                   \\  \\   /  /");
             }
 
-            self::$console->println($isHit ? "Yeah ! Nice hit !" : "Miss");
+            if ($isHit) {
+                $line = Color::CHARTREUSE . 'Yeah ! Nice hit !';
+            } else {
+                $line = Color::CADET_BLUE . 'Miss';
+            }
+            self::$console->println($line.Color::DEFAULT_GREY);
             if ($isHit) {
                 if ($ship->isDestroyed()) {
                     self::$console->println(Color::CHARTREUSE . 'Enemy\'s ' . $ship->getName() . ' was destroyed!' . Color::DEFAULT_GREY);
