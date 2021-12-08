@@ -124,7 +124,7 @@ class App
             self::$console->println('======================================================');
             self::$console->println();
             self::$console->println(Color::MAGENTA . "Player, it's your turn" . Color::DEFAULT_GREY);
-
+            self::$console->println();
             self::$console->println("Enemy's ships:");
             /** @var Ship $ship */
             foreach (self::$enemyFleet as $ship) {
@@ -134,7 +134,7 @@ class App
                 }
                 self::$console->println($line);
             }
-
+            self::$console->println();
             $parsedPosition = null;
             while (null === $parsedPosition) {
                 self::$console->println("Enter coordinates for your shot :");
@@ -161,7 +161,8 @@ class App
                 self::$console->println("                 -\\  \\     /  /-");
                 self::$console->println("                   \\  \\   /  /");
             }
-
+            self::$console->println();
+            self::$console->println('======================================================');
             if ($isHit) {
                 $line = Color::CHARTREUSE . 'Yeah ! Nice hit !';
                 if (true === self::isFleetDestroyed(self::$enemyFleet)) {
