@@ -9,12 +9,14 @@ class Ship
     private $size;
     private $color;
     private $positions = array();
+    private $hits;
 
     public function __construct($name, $size, $color = null)
     {
         $this->name = $name;
         $this->size = $size;
         $this->color = $color;
+        $this->hits = 0;
     }
 
     /**
@@ -47,6 +49,20 @@ class Ship
         $number = substr($input, 1, 1);
 
         array_push($this->positions, new Position($letter, $number));
+    }
+
+    /**
+     * @return void
+     */
+    public function hit() {
+        $this->hits++;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDestroyed() {
+        return $this->hits >= $this->size;
     }
 
     public function &getPositions()

@@ -1,14 +1,17 @@
 <?php
 
-use Battleship\GameController;
-use Battleship\Position;
-use Battleship\Letter;
+require_once 'Console.php';
+
 use Battleship\Color;
+use Battleship\GameController;
+use Battleship\Letter;
+use Battleship\Position;
+use Battleship\Ship;
 
 class App
 {
-    private static $myFleet = array();
-    private static $enemyFleet = array();
+    private static $myFleet = [];
+    private static $enemyFleet = [];
     private static $console;
 
     static function run()
@@ -120,11 +123,24 @@ class App
         while (true) {
             self::$console->println("");
             self::$console->println("Player, it's your turn");
+
+            self::$console->println("Enemy's ships:");
+            /** @var Ship $ship */
+            foreach (self::$enemyFleet as $ship) {
+                $line = '- ' . $ship->getName() . ', size: ' . $ship->getSize();
+                if ($ship->isDestroyed()) {
+                    $line .= Color::CHARTREUSE . ' DESTROYED' . Color::DEFAULT_GREY;
+                }
+                self::$console->println($line);
+            }
+
             self::$console->println("Enter coordinates for your shot :");
             $position = readline("");
 
-            $isHit = GameController::checkIsHit(self::$enemyFleet, self::parsePosition($position));
+            $ship = GameController::getShip(self::$enemyFleet, self::parsePosition($position));
+            $isHit = null !== $ship;
             if ($isHit) {
+                $ship->hit();
                 self::beep();
                 self::$console->println("                \\         .  ./");
                 self::$console->println("              \\      .:\" \";'.:..\" \"   /");
@@ -136,11 +152,17 @@ class App
                 self::$console->println("                   \\  \\   /  /");
             }
 
-            echo $isHit ? "Yeah ! Nice hit !" : "Miss";
+            self::$console->println($isHit ? "Yeah ! Nice hit !" : "Miss");
+            if ($isHit) {
+                if ($ship->isDestroyed()) {
+                    self::$console->println(Color::CHARTREUSE . 'Enemy\'s ' . $ship->getName() . ' was destroyed!' . Color::DEFAULT_GREY);
+                }
+            }
             self::$console->println();
 
             $position = self::getRandomPosition();
-            $isHit = GameController::checkIsHit(self::$myFleet, $position);
+            $ship = GameController::getShip(self::$myFleet, self::parsePosition($position));
+            $isHit = null !== $ship;
             self::$console->println();
             printf("Computer shoot in %s%s and %s", $position->getColumn(), $position->getRow(), $isHit ? "hit your ship !\n" : "miss");
             if ($isHit) {
@@ -166,7 +188,7 @@ class App
         $letter = substr($input, 0, 1);
         $number = substr($input, 1, 1);
 
-        if(!is_numeric($number)) {
+        if (!is_numeric($number)) {
             throw new Exception("Not a number: $number");
         }
 

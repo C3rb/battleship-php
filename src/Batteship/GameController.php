@@ -17,9 +17,12 @@ class GameController
             throw new InvalidArgumentException("shot is null");
         }
 
+        /** @var Ship $ship */
         foreach ($fleet as $ship) {
             foreach ($ship->getPositions() as $position) {
                 if ($position == $shot) {
+                    $ship->hit();
+
                     return true;
                 }
             }
@@ -28,14 +31,33 @@ class GameController
         return false;
     }
 
+    /**
+     * @param array    $fleet
+     * @param Position $position
+     * @return Ship|null
+     */
+    public static function getShip(array $fleet, Position $position)
+    {
+        /** @var Ship $ship */
+        foreach ($fleet as $ship) {
+            foreach ($ship->getPositions() as $shipPosition) {
+                if ($position == $shipPosition) {
+                    return $ship;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public static function initializeShips()
     {
-        return Array(
+        return [
             new Ship("Aircraft Carrier", 5, Color::CADET_BLUE),
             new Ship("Battleship", 4, Color::RED),
             new Ship("Submarine", 3, Color::CHARTREUSE),
             new Ship("Destroyer", 3, Color::YELLOW),
-            new Ship("Patrol Boat", 2, Color::ORANGE));
+            new Ship("Patrol Boat", 2, Color::ORANGE)];
     }
 
     public static function isShipValid($ship)
