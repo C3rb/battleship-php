@@ -346,16 +346,7 @@ class App
             self::$console->println();
             self::$console->println(Color::MAGENTA . "Player, it's your turn" . Color::DEFAULT_GREY);
             self::$console->println();
-            self::$console->println("Enemy's ships:");
-            /** @var Ship $ship */
-            foreach (self::$enemyFleet as $ship) {
-                $line = '- ' . $ship->getName() . ', size: ' . $ship->getSize();
-                if ($ship->isDestroyed()) {
-                    $line .= Color::CHARTREUSE . ' DESTROYED' . Color::DEFAULT_GREY;
-                }
-                self::$console->println($line);
-            }
-            self::$console->println();
+            self::drawEnemyFleet();
             $parsedPosition = null;
             while (null === $parsedPosition) {
                 self::$console->println("Enter coordinates for your shot :");
@@ -388,7 +379,9 @@ class App
             if ($isHit) {
                 $line = Color::CHARTREUSE . 'Yeah ! Nice hit !';
                 if (true === self::isFleetDestroyed(self::$enemyFleet)) {
+                    self::drawEnemyFleet();
                     self::$console->println(Color::MAGENTA . 'You are the winner!');
+                    self::$console->println(Color::DEFAULT_GREY);
                     exit();
                 }
             } else {
@@ -434,6 +427,20 @@ class App
                 exit();
             }
         }
+    }
+
+    public static function drawEnemyFleet() : void
+    {
+        self::$console->println(Color::MAGENTA . "Enemy's ships:");
+        /** @var Ship $ship */
+        foreach (self::$enemyFleet as $ship) {
+            $line = '- ' . $ship->getName() . ', size: ' . $ship->getSize();
+            if ($ship->isDestroyed()) {
+                $line .= Color::CHARTREUSE . ' DESTROYED' . Color::DEFAULT_GREY;
+            }
+            self::$console->println($line);
+        }
+        self::$console->println();
     }
 
     public static function isFleetDestroyed($fleet) : bool
