@@ -40,29 +40,250 @@ class App
 
     public static function InitializeEnemyFleet()
     {
-        self::$enemyFleet = GameController::initializeShips();
+        $enemyFleets = [
+            self::renderEnemyFleet1(),
+            self::renderEnemyFleet2(),
+            self::renderEnemyFleet3(),
+            self::renderEnemyFleet4(),
+            self::renderEnemyFleet5(),
+            self::renderEnemyFleet6(),
+            self::renderEnemyFleet7(),
+            self::renderEnemyFleet8(),
+        ];
 
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 4));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 5));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 6));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 7));
-        array_push(self::$enemyFleet[0]->getPositions(), new Position('B', 8));
+        self::$enemyFleet = $enemyFleets[array_rand($enemyFleets, 1)];
+    }
 
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 6));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 7));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 8));
-        array_push(self::$enemyFleet[1]->getPositions(), new Position('E', 9));
+    public static function renderEnemyFleet1()
+    {
+        $fleet = GameController::initializeShips();
 
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('A', 3));
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('B', 3));
-        array_push(self::$enemyFleet[2]->getPositions(), new Position('C', 3));
+        array_push($fleet[0]->getPositions(), new Position('B', 4));
+        array_push($fleet[0]->getPositions(), new Position('B', 5));
+        array_push($fleet[0]->getPositions(), new Position('B', 6));
+        array_push($fleet[0]->getPositions(), new Position('B', 7));
+        array_push($fleet[0]->getPositions(), new Position('B', 8));
 
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('F', 8));
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('G', 8));
-        array_push(self::$enemyFleet[3]->getPositions(), new Position('H', 8));
+        array_push($fleet[1]->getPositions(), new Position('E', 5));
+        array_push($fleet[1]->getPositions(), new Position('E', 6));
+        array_push($fleet[1]->getPositions(), new Position('E', 7));
+        array_push($fleet[1]->getPositions(), new Position('E', 8));
 
-        array_push(self::$enemyFleet[4]->getPositions(), new Position('C', 5));
-        array_push(self::$enemyFleet[4]->getPositions(), new Position('C', 6));
+        array_push($fleet[2]->getPositions(), new Position('A', 3));
+        array_push($fleet[2]->getPositions(), new Position('B', 3));
+        array_push($fleet[2]->getPositions(), new Position('C', 3));
+
+        array_push($fleet[3]->getPositions(), new Position('F', 8));
+        array_push($fleet[3]->getPositions(), new Position('G', 8));
+        array_push($fleet[3]->getPositions(), new Position('H', 8));
+
+        array_push($fleet[4]->getPositions(), new Position('C', 5));
+        array_push($fleet[4]->getPositions(), new Position('C', 6));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet2()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('E', 4));
+        array_push($fleet[0]->getPositions(), new Position('E', 5));
+        array_push($fleet[0]->getPositions(), new Position('E', 6));
+        array_push($fleet[0]->getPositions(), new Position('E', 7));
+        array_push($fleet[0]->getPositions(), new Position('E', 8));
+
+        array_push($fleet[1]->getPositions(), new Position('A', 1));
+        array_push($fleet[1]->getPositions(), new Position('A', 2));
+        array_push($fleet[1]->getPositions(), new Position('A', 3));
+        array_push($fleet[1]->getPositions(), new Position('A', 4));
+
+        array_push($fleet[2]->getPositions(), new Position('C', 1));
+        array_push($fleet[2]->getPositions(), new Position('D', 1));
+        array_push($fleet[2]->getPositions(), new Position('E', 1));
+
+        array_push($fleet[3]->getPositions(), new Position('F', 2));
+        array_push($fleet[3]->getPositions(), new Position('G', 2));
+        array_push($fleet[3]->getPositions(), new Position('H', 2));
+
+        array_push($fleet[4]->getPositions(), new Position('H', 5));
+        array_push($fleet[4]->getPositions(), new Position('H', 6));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet3()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('E', 2));
+        array_push($fleet[0]->getPositions(), new Position('E', 3));
+        array_push($fleet[0]->getPositions(), new Position('E', 4));
+        array_push($fleet[0]->getPositions(), new Position('E', 5));
+        array_push($fleet[0]->getPositions(), new Position('E', 6));
+
+        array_push($fleet[1]->getPositions(), new Position('C', 4));
+        array_push($fleet[1]->getPositions(), new Position('C', 5));
+        array_push($fleet[1]->getPositions(), new Position('C', 6));
+        array_push($fleet[1]->getPositions(), new Position('C', 7));
+
+        array_push($fleet[2]->getPositions(), new Position('E', 9));
+        array_push($fleet[2]->getPositions(), new Position('F', 9));
+        array_push($fleet[2]->getPositions(), new Position('G', 9));
+
+        array_push($fleet[3]->getPositions(), new Position('A', 2));
+        array_push($fleet[3]->getPositions(), new Position('B', 2));
+        array_push($fleet[3]->getPositions(), new Position('C', 2));
+
+        array_push($fleet[4]->getPositions(), new Position('A', 5));
+        array_push($fleet[4]->getPositions(), new Position('A', 6));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet4()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('B', 2));
+        array_push($fleet[0]->getPositions(), new Position('B', 3));
+        array_push($fleet[0]->getPositions(), new Position('B', 4));
+        array_push($fleet[0]->getPositions(), new Position('B', 5));
+        array_push($fleet[0]->getPositions(), new Position('B', 6));
+
+        array_push($fleet[1]->getPositions(), new Position('H', 2));
+        array_push($fleet[1]->getPositions(), new Position('H', 3));
+        array_push($fleet[1]->getPositions(), new Position('H', 4));
+        array_push($fleet[1]->getPositions(), new Position('H', 5));
+
+        array_push($fleet[2]->getPositions(), new Position('D', 2));
+        array_push($fleet[2]->getPositions(), new Position('E', 2));
+        array_push($fleet[2]->getPositions(), new Position('F', 2));
+
+        array_push($fleet[3]->getPositions(), new Position('D', 6));
+        array_push($fleet[3]->getPositions(), new Position('E', 6));
+        array_push($fleet[3]->getPositions(), new Position('F', 6));
+
+        array_push($fleet[4]->getPositions(), new Position('A', 7));
+        array_push($fleet[4]->getPositions(), new Position('A', 8));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet5()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('H', 1));
+        array_push($fleet[0]->getPositions(), new Position('H', 2));
+        array_push($fleet[0]->getPositions(), new Position('H', 3));
+        array_push($fleet[0]->getPositions(), new Position('H', 4));
+        array_push($fleet[0]->getPositions(), new Position('H', 5));
+
+        array_push($fleet[1]->getPositions(), new Position('E', 2));
+        array_push($fleet[1]->getPositions(), new Position('E', 3));
+        array_push($fleet[1]->getPositions(), new Position('E', 4));
+        array_push($fleet[1]->getPositions(), new Position('E', 5));
+
+        array_push($fleet[2]->getPositions(), new Position('A', 1));
+        array_push($fleet[2]->getPositions(), new Position('B', 1));
+        array_push($fleet[2]->getPositions(), new Position('C', 1));
+
+        array_push($fleet[3]->getPositions(), new Position('A', 8));
+        array_push($fleet[3]->getPositions(), new Position('B', 8));
+        array_push($fleet[3]->getPositions(), new Position('C', 8));
+
+        array_push($fleet[4]->getPositions(), new Position('H', 7));
+        array_push($fleet[4]->getPositions(), new Position('H', 8));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet6()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('H', 1));
+        array_push($fleet[0]->getPositions(), new Position('H', 2));
+        array_push($fleet[0]->getPositions(), new Position('H', 3));
+        array_push($fleet[0]->getPositions(), new Position('H', 4));
+        array_push($fleet[0]->getPositions(), new Position('H', 5));
+
+        array_push($fleet[1]->getPositions(), new Position('E', 2));
+        array_push($fleet[1]->getPositions(), new Position('E', 3));
+        array_push($fleet[1]->getPositions(), new Position('E', 4));
+        array_push($fleet[1]->getPositions(), new Position('E', 5));
+
+        array_push($fleet[2]->getPositions(), new Position('A', 1));
+        array_push($fleet[2]->getPositions(), new Position('B', 1));
+        array_push($fleet[2]->getPositions(), new Position('C', 1));
+
+        array_push($fleet[3]->getPositions(), new Position('A', 8));
+        array_push($fleet[3]->getPositions(), new Position('B', 8));
+        array_push($fleet[3]->getPositions(), new Position('C', 8));
+
+        array_push($fleet[4]->getPositions(), new Position('B', 4));
+        array_push($fleet[4]->getPositions(), new Position('B', 5));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet7()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('H', 1));
+        array_push($fleet[0]->getPositions(), new Position('H', 2));
+        array_push($fleet[0]->getPositions(), new Position('H', 3));
+        array_push($fleet[0]->getPositions(), new Position('H', 4));
+        array_push($fleet[0]->getPositions(), new Position('H', 5));
+
+        array_push($fleet[1]->getPositions(), new Position('E', 2));
+        array_push($fleet[1]->getPositions(), new Position('E', 3));
+        array_push($fleet[1]->getPositions(), new Position('E', 4));
+        array_push($fleet[1]->getPositions(), new Position('E', 5));
+
+        array_push($fleet[2]->getPositions(), new Position('E', 8));
+        array_push($fleet[2]->getPositions(), new Position('F', 8));
+        array_push($fleet[2]->getPositions(), new Position('G', 8));
+
+        array_push($fleet[3]->getPositions(), new Position('A', 8));
+        array_push($fleet[3]->getPositions(), new Position('B', 8));
+        array_push($fleet[3]->getPositions(), new Position('C', 8));
+
+        array_push($fleet[4]->getPositions(), new Position('B', 4));
+        array_push($fleet[4]->getPositions(), new Position('B', 5));
+
+        return $fleet;
+    }
+
+    public static function renderEnemyFleet8()
+    {
+        $fleet = GameController::initializeShips();
+
+        array_push($fleet[0]->getPositions(), new Position('C', 1));
+        array_push($fleet[0]->getPositions(), new Position('C', 2));
+        array_push($fleet[0]->getPositions(), new Position('C', 3));
+        array_push($fleet[0]->getPositions(), new Position('C', 4));
+        array_push($fleet[0]->getPositions(), new Position('C', 5));
+
+        array_push($fleet[1]->getPositions(), new Position('E', 2));
+        array_push($fleet[1]->getPositions(), new Position('E', 3));
+        array_push($fleet[1]->getPositions(), new Position('E', 4));
+        array_push($fleet[1]->getPositions(), new Position('E', 5));
+
+        array_push($fleet[2]->getPositions(), new Position('E', 8));
+        array_push($fleet[2]->getPositions(), new Position('F', 8));
+        array_push($fleet[2]->getPositions(), new Position('G', 8));
+
+        array_push($fleet[3]->getPositions(), new Position('A', 8));
+        array_push($fleet[3]->getPositions(), new Position('B', 8));
+        array_push($fleet[3]->getPositions(), new Position('C', 8));
+
+        array_push($fleet[4]->getPositions(), new Position('B', 4));
+        array_push($fleet[4]->getPositions(), new Position('B', 5));
+
+        return $fleet;
     }
 
     public static function getRandomPosition()
