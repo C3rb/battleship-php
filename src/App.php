@@ -432,6 +432,7 @@ class App
     public static function drawEnemyFleet() : void
     {
         self::$console->println(Color::MAGENTA . "Enemy's ships:");
+        self::$console->println(Color::DEFAULT_GREY);
         /** @var Ship $ship */
         foreach (self::$enemyFleet as $ship) {
             $line = '- ' . $ship->getName() . ', size: ' . $ship->getSize();
