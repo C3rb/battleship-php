@@ -373,6 +373,7 @@ class App
             if ($isHit) {
                 $ship->hit();
                 self::beep();
+                self::$console->println(Color::RED);
                 self::$console->println("                \\         .  ./");
                 self::$console->println("              \\      .:\" \";'.:..\" \"   /");
                 self::$console->println("                  (M^^.^~~:.'\" \").");
@@ -416,7 +417,7 @@ class App
             if ($isHit) {
                 self::$console->println();
                 self::beep();
-
+                self::$console->println(Color::RED);
                 self::$console->println("                \\         .  ./");
                 self::$console->println("              \\      .:\" \";'.:..\" \"   /");
                 self::$console->println("                  (M^^.^~~:.'\" \").");
@@ -426,7 +427,7 @@ class App
                 self::$console->println("                 -\\  \\     /  /-");
                 self::$console->println("                   \\  \\   /  /");
             }
-            self::$console->println();
+            self::$console->println(Color::DEFAULT_GREY);
 
             if (true === self::isFleetDestroyed(self::$myFleet)) {
                 self::$console->println(Color::ORANGE . ' YOU LOSE!');
