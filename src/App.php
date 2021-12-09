@@ -309,9 +309,23 @@ class App
             printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
 
             for ($i = 1; $i <= $ship->getSize(); $i++) {
-                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
-                $input = readline("");
-                $ship->addPosition($input);
+                $parsedPosition = null;
+//                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
+                while (null === $parsedPosition) {
+                    printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
+//                    self::$console->println("Enter coordinates for your shot :");
+                    $position = readline("");
+
+                    try {
+                        $parsedPosition = self::parsePosition($position);
+
+
+                    } catch (InvalidArgumentException $e) {
+                        self::$console->println($e->getMessage());
+                    }
+                }
+
+                $ship->addPosition($parsedPosition);
             }
         }
     }
@@ -463,6 +477,10 @@ class App
 
         if (!is_numeric($number)) {
             throw new InvalidArgumentException("Not a number: $number");
+        }
+
+        if ($number > 8) {
+            throw new InvalidArgumentException("Number out of scope!");
         }
 
         return new Position($letter, $number);
