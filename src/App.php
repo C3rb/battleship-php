@@ -381,6 +381,7 @@ class App
                 if (true === self::isFleetDestroyed(self::$enemyFleet)) {
                     self::drawEnemyFleet();
                     self::$console->println(Color::MAGENTA . 'You are the winner!');
+                    self::$console->println(Color::DEFAULT_GREY);
                     exit();
                 }
             } else {
@@ -430,7 +431,7 @@ class App
 
     public static function drawEnemyFleet() : void
     {
-        self::$console->println("Enemy's ships:");
+        self::$console->println(Color::MAGENTA . "Enemy's ships:");
         /** @var Ship $ship */
         foreach (self::$enemyFleet as $ship) {
             $line = '- ' . $ship->getName() . ', size: ' . $ship->getSize();
