@@ -372,8 +372,7 @@ class App
                     $parsedPosition = self::parsePosition($position);
                 } catch (InvalidArgumentException $e) {
                     self::$console->println(Color::CADET_BLUE . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-                    self::$console->println(Color::CADET_BLUE . 'Miss');
-                    self::$console->println('Your position is out of playing field.');
+                    self::$console->println('You cannot shot out of playing field.');
                     self::$console->println(Color::CADET_BLUE . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
                     self::$console->println(Color::DEFAULT_GREY);
                 }
