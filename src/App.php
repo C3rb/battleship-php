@@ -303,6 +303,8 @@ class App
 
         self::$console->println("Please position your fleet (Game board has size from A to H and 1 to 8) :");
 
+        $positionBoard = new \Battleship\Board(8, 8);
+        /** @var Ship $ship */
         foreach (self::$myFleet as $ship) {
 
             self::$console->println();
@@ -310,19 +312,19 @@ class App
 
             for ($i = 1; $i <= $ship->getSize(); $i++) {
                 $parsedPosition = null;
-//                printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
-                while (null === $parsedPosition) {
+                while (true) {
                     printf("\nEnter position %s of %s (i.e A3):", $i, $ship->getSize());
-//                    self::$console->println("Enter coordinates for your shot :");
                     $position = readline("");
 
                     try {
                         $parsedPosition = self::parsePosition($position);
-
+                        $positionBoard->setField($parsedPosition, $ship->getName());
 
                     } catch (InvalidArgumentException $e) {
                         self::$console->println($e->getMessage());
+                        continue;
                     }
+                    break;
                 }
 
                 $ship->addPosition($parsedPosition);
