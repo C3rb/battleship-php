@@ -14,6 +14,9 @@ class App
     private static $enemyFleet = [];
     private static $console;
 
+    /** @var \Battleship\Board */
+    private static $computerShootBoard;
+
     static function run()
     {
         self::$console = new Console();
@@ -52,6 +55,7 @@ class App
         ];
 
         self::$enemyFleet = $enemyFleets[array_rand($enemyFleets, 1)];
+        self::$computerShootBoard = new \Battleship\Board(8, 8);
     }
 
     public static function renderEnemyFleet1()
@@ -286,15 +290,22 @@ class App
         return $fleet;
     }
 
-    public static function getRandomPosition()
+    public static function getRandomPosition(\Battleship\Board $board)
     {
-        $rows = 8;
-        $lines = 8;
+        while (true) {
+            $letter = Letter::value(random_int(0, $board->getRows() - 1));
+            $number = random_int(1, $board->getColumns());
 
-        $letter = Letter::value(random_int(0, $lines - 1));
-        $number = random_int(0, $rows - 1);
+            $position = new Position($letter, $number);
+            try {
+                $board->setField($position, 'shoot');
+                break;
+            } catch (\InvalidArgumentException $exception) {
+                continue;
+            }
+        }
 
-        return new Position($letter, $number);
+        return $position;
     }
 
     public static function InitializeMyFleet()
@@ -306,7 +317,6 @@ class App
         $positionBoard = new \Battleship\Board(8, 8);
         /** @var Ship $ship */
         foreach (self::$myFleet as $ship) {
-
             self::$console->println();
             printf("Please enter the positions for the %s (size: %s)", $ship->getName(), $ship->getSize());
 
@@ -414,7 +424,7 @@ class App
             }
             self::$console->println();
 
-            $position = self::getRandomPosition();
+            $position = self::getRandomPosition(self::$computerShootBoard);
             $ship = GameController::getShip(self::$myFleet, self::parsePosition($position));
             $isHit = null !== $ship;
             self::$console->println(Color::CADET_BLUE . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
