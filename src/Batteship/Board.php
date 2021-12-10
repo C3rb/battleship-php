@@ -12,7 +12,7 @@ class Board
         $this->fields = [];
         for ($r = 0; $r < $rows; $r++) {
             $this->fields[Letter::$letters[$r]] = [];
-            for ($c = 0; $c < $columns; $c++) {
+            for ($c = 1; $c <= $columns; $c++) {
                 $this->fields[Letter::$letters[$r]][] = null;
             }
         }
