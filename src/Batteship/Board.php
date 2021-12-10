@@ -7,15 +7,30 @@ class Board
     /** @var array */
     private $fields;
 
+    private $rows;
+    private $columns;
+
     public function __construct(int $rows, int $columns)
     {
+        $this->rows = $rows;
+        $this->columns = $columns;
         $this->fields = [];
         for ($r = 0; $r < $rows; $r++) {
             $this->fields[Letter::$letters[$r]] = [];
-            for ($c = 0; $c < $columns; $c++) {
-                $this->fields[Letter::$letters[$r]][] = null;
+            for ($c = 1; $c <= $columns; $c++) {
+                $this->fields[Letter::$letters[$r]][$c] = null;
             }
         }
+    }
+
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    public function getColumns()
+    {
+        return $this->columns;
     }
 
     public function setField(Position $position, string $value)
