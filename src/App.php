@@ -369,7 +369,11 @@ class App
                 try {
                     $parsedPosition = self::parsePosition($position);
                 } catch (InvalidArgumentException $e) {
-                    self::$console->println($e->getMessage());
+                    self::$console->println(Color::CADET_BLUE . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+                    self::$console->println(Color::CADET_BLUE . 'Miss');
+                    self::$console->println('Your position is out of playing field.');
+                    self::$console->println(Color::CADET_BLUE . '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+                    self::$console->println(Color::DEFAULT_GREY);
                 }
             }
 
@@ -472,16 +476,15 @@ class App
     public static function parsePosition($input)
     {
         $letter = substr($input, 0, 1);
-        $number = substr($input, 1, 1);
+        $number = substr($input, (strlen($input) - 1) * -1);
 
         Letter::validate($letter);
-
         if (!is_numeric($number)) {
             throw new InvalidArgumentException("Not a number: $number");
         }
 
         if ($number > 8) {
-            throw new InvalidArgumentException("Number out of scope!");
+            throw new InvalidArgumentException('Your position is out of playing field.');
         }
 
         return new Position($letter, $number);
